@@ -7,7 +7,6 @@ import {
   Plus,
   MessageCircle,
   User,
-  CalendarDays,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -15,9 +14,11 @@ import CreateSheet from "./CreateSheet";
 import LoginPrompt from "./LoginPrompt";
 import { useAuth } from "@/context/AuthContext";
 
+// Mobile-only bottom navigation. Desktop gets the left sidebar from
+// components/Sidebar instead (see app/(app)/layout.js).
 function BottomNav() {
   const router = useRouter();
-  const { user, isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   const [showCreate, setShowCreate] = useState(false);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
@@ -41,7 +42,7 @@ function BottomNav() {
   };
 
   const navButton =
-    "flex flex-col items-center justify-center gap-[3px] text-slate-500 text-[9px] lg:w-full lg:h-12 lg:flex-row lg:justify-start lg:gap-[14px] lg:rounded-[11px] lg:px-[14px] lg:text-[12px] lg:font-semibold lg:hover:bg-indigo-50 lg:hover:text-indigo-500";
+    "flex flex-col items-center justify-center gap-[3px] text-slate-500 text-[9px]";
 
   return (
     <>
@@ -63,31 +64,6 @@ function BottomNav() {
           border-slate-200
           bg-white/95
           shadow-[0_8px_25px_rgba(15,23,42,0.12)]
-
-          lg:left-0
-          lg:top-0
-          lg:bottom-0
-          lg:h-screen
-          lg:w-[220px]
-          lg:max-w-none
-          lg:translate-x-0
-          lg:flex-col
-          lg:items-stretch
-          lg:justify-start
-          lg:gap-1.5
-          lg:rounded-none
-          lg:border-l-0
-          lg:border-r
-          lg:border-t-0
-          lg:border-b-0
-          lg:border-slate-200
-          lg:bg-white
-          lg:px-4
-          lg:pt-[98px]
-          lg:pb-[30px]
-
-          min-[1400px]:w-[240px]
-          min-[1400px]:px-[22px]
 
           max-[380px]:bottom-[7px]
           max-[380px]:w-[calc(100%-14px)]
@@ -124,44 +100,22 @@ function BottomNav() {
             items-center
             justify-center
             rounded-full
-            bg-gradient-to-br
-            from-indigo-500
-            to-violet-500
+            bg-indigo-500
             text-white
             shadow-[0_5px_20px_rgba(99,102,241,0.4)]
 
             max-[380px]:size-12
-
-            lg:my-1
-            lg:h-12
-            lg:w-full
-            lg:flex-row
-            lg:justify-start
-            lg:gap-[14px]
-            lg:rounded-[11px]
-            lg:bg-transparent
-            lg:px-[14px]
-            lg:text-slate-500
-            lg:shadow-none
-            lg:hover:bg-indigo-50
-            lg:hover:text-indigo-500
           "
           onClick={handleCreateClick}
         >
           <Plus size={27} />
-
-          <span className="hidden text-[12px] font-semibold lg:inline">
-            Create
-          </span>
         </button>
 
         {/* Messages */}
         <button
           type="button"
           className={navButton}
-          onClick={() =>
-            handleRestrictedNavigation("/messages")
-          }
+          onClick={() => handleRestrictedNavigation("/messages")}
         >
           <MessageCircle size={21} />
           <span>Messages</span>
@@ -171,53 +125,11 @@ function BottomNav() {
         <button
           type="button"
           className={navButton}
-          onClick={() =>
-            handleRestrictedNavigation("/profile")
-          }
+          onClick={() => handleRestrictedNavigation("/profile")}
         >
           <User size={21} />
           <span>Profile</span>
         </button>
-
-        {/* Desktop User */}
-        <div
-          className="
-            hidden
-            lg:mt-auto
-            lg:flex
-            lg:items-center
-            lg:gap-[10px]
-            lg:border-t
-            lg:border-slate-200
-            lg:px-2
-            lg:pt-4
-            lg:pb-1
-          "
-        >
-          {user?.profilePhoto ? (
-            <img
-              src={user.profilePhoto}
-              alt=""
-              className="size-[38px] shrink-0 rounded-full object-cover"
-            />
-          ) : (
-            <div className="flex size-[38px] shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-indigo-500">
-              {user?.name?.charAt(0)?.toUpperCase() || "U"}
-            </div>
-          )}
-
-          <div className="flex min-w-0 flex-col">
-            <strong className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px]">
-              {user?.name || "Guest"}
-            </strong>
-
-            <span className="mt-[3px] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] text-slate-500">
-              {user?.username ||
-                user?.department ||
-                "UniLink"}
-            </span>
-          </div>
-        </div>
       </nav>
 
       <CreateSheet

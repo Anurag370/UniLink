@@ -58,6 +58,7 @@ export default function MessagesPage() {
             account: toClientAccount(conversation.user),
             latestMessage: conversation.latestMessage,
             unreadCount: conversation.unreadCount,
+            online: conversation.user?.activeState === "online",
           }))
           .filter((item) => item.account)
           .sort((a, b) => {
@@ -218,7 +219,7 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24 lg:ml-[220px] lg:pb-10">
+    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
 
         {/* HEADER */}
@@ -312,6 +313,7 @@ export default function MessagesPage() {
                   account,
                   latestMessage,
                   unreadCount,
+                  online,
                 }) => {
                   const photo =
                     account.profilePhoto ||
@@ -333,19 +335,28 @@ export default function MessagesPage() {
                       className="flex w-full items-center gap-3 border-b border-slate-100 p-4 text-left transition last:border-b-0 hover:bg-slate-50"
                     >
                       {/* AVATAR */}
-                      {photo ? (
-                        <img
-                          src={photo}
-                          alt={account.name || "User"}
-                          className="h-12 w-12 shrink-0 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold text-indigo-500">
-                          {account.name
-                            ?.charAt(0)
-                            ?.toUpperCase() || "U"}
-                        </div>
-                      )}
+                      <div className="relative shrink-0">
+                        {photo ? (
+                          <img
+                            src={photo}
+                            alt={account.name || "User"}
+                            className="h-12 w-12 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold text-indigo-500">
+                            {account.name
+                              ?.charAt(0)
+                              ?.toUpperCase() || "U"}
+                          </div>
+                        )}
+
+                        {online && (
+                          <span
+                            aria-label="Online"
+                            className="absolute bottom-0 right-0 size-3 rounded-full border-2 border-white bg-green-500"
+                          />
+                        )}
+                      </div>
 
                       {/* CONTENT */}
                       <div className="min-w-0 flex-1">

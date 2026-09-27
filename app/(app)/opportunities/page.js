@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {
   CalendarDays,
   MapPin,
-  ExternalLink,
+  ArrowRight,
   Search,
   Plus,
 } from "lucide-react";
@@ -81,7 +81,7 @@ export default function Opportunities() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-10 lg:ml-[220px] min-[1400px]:ml-[240px]">
+    <div className="min-h-screen bg-slate-50 pb-10">
       {/* HEADER */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 px-6 py-4 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between">
@@ -168,7 +168,18 @@ export default function Opportunities() {
               (opportunity) => (
                 <article
                   key={opportunity.id}
-                  className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(15,23,42,0.08)]"
+                  role="link"
+                  tabIndex={0}
+                  aria-label={`Open ${opportunity.title}`}
+                  onClick={() =>
+                    router.push(`/opportunities/${opportunity.id}`)
+                  }
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      router.push(`/opportunities/${opportunity.id}`);
+                    }
+                  }}
+                  className="cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(15,23,42,0.08)]"
                 >
                   {/* BANNER */}
                   {opportunity.banner ? (
@@ -227,18 +238,11 @@ export default function Opportunities() {
                       {opportunity.description}
                     </p>
 
-                    {/* LINK */}
-                    {opportunity.link && (
-                      <a
-                        href={opportunity.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-indigo-600"
-                      >
-                        View Opportunity
-                        <ExternalLink size={14} />
-                      </a>
-                    )}
+                    {/* OPEN DETAIL */}
+                    <div className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-indigo-50 px-4 py-2.5 text-xs font-semibold text-indigo-600">
+                      View details
+                      <ArrowRight size={14} />
+                    </div>
                   </div>
                 </article>
               )

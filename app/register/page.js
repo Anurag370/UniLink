@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, GraduationCap, UserRound } from "lucide-react";
+import { ArrowLeft, Camera, GraduationCap, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
@@ -14,6 +14,8 @@ export default function Register() {
   const [accountType, setAccountType] = useState("student");
 
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [department, setDepartment] = useState("");
@@ -25,6 +27,18 @@ export default function Register() {
 
   const [registrationError, setRegistrationError] = useState("");
 
+  const handlePhotoChange = (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => setProfilePhoto(reader.result);
+
+    reader.readAsDataURL(file);
+  };
+
   const handleRegister = async (event) => {
     event.preventDefault();
 
@@ -32,10 +46,13 @@ export default function Register() {
 
     const newUser = {
       fullName: name.trim(),
+      username: username.trim() || undefined,
       email: email.trim().toLowerCase(),
       password,
       department,
       accountType,
+
+      ...(profilePhoto ? { profilePhoto } : {}),
 
       ...(accountType === "student"
         ? {
@@ -131,6 +148,45 @@ export default function Register() {
           className="auth-form"
           onSubmit={handleRegister}
         >
+          {/* PROFILE PICTURE */}
+
+          <div className="mb-5 flex items-center gap-4">
+            <div className="relative shrink-0">
+              <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white">
+                {profilePhoto ? (
+                  <img
+                    src={profilePhoto}
+                    alt="Profile"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <UserRound size={26} />
+                )}
+              </div>
+
+              <label className="absolute bottom-0 right-0 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-indigo-500 text-white transition hover:bg-indigo-600">
+                <Camera size={13} />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  className="hidden"
+                />
+              </label>
+            </div>
+
+            <div>
+              <p className="text-[12px] font-semibold text-slate-900">
+                Profile picture
+              </p>
+
+              <p className="mt-1 text-[10px] leading-[1.4] text-slate-500">
+                Upload a photo so classmates recognise you.
+              </p>
+            </div>
+          </div>
+
           <div className="mb-4">
             <label className="mb-[7px] block text-[11px] font-semibold">Full Name *</label>
 
@@ -144,6 +200,24 @@ export default function Register() {
                   setName(event.target.value)
                 }
                 required
+              />
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <label className="mb-[7px] block text-[11px] font-semibold">Username</label>
+
+            <div className="flex h-[46px] items-center gap-[9px] rounded-xl border border-slate-200 bg-white px-[13px] text-slate-400 focus-within:border-indigo-500 focus-within:shadow-[0_0_0_3px_rgba(99,102,241,0.1)]">
+              <span className="text-[12px] text-slate-400">@</span>
+
+              <input
+                className="w-full border-none bg-transparent outline-none placeholder:text-slate-400 text-slate-900 text-[12px]"
+                type="text"
+                placeholder="username"
+                value={username}
+                onChange={(event) =>
+                  setUsername(event.target.value)
+                }
               />
             </div>
           </div>

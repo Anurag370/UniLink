@@ -54,6 +54,9 @@ export const users = pgTable(
     graduationYear: integer("graduation_year"),
     currentRole: text("current_role"),
     company: text("company"),
+    // Presence heartbeat, written at most once a minute by requireUser().
+    // Nullable: never-active accounts are simply "offline".
+    lastActiveAt: bigint("last_active_at", { mode: "number" }),
     ...timestamps,
   },
   (table) => [uniqueIndex("users_email_unique").on(table.email)]

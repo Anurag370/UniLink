@@ -1,4 +1,4 @@
-import { and, count, desc, eq, or, sql } from "drizzle-orm";
+import { and, count, desc, eq, inArray, or, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { profiles, skills, userSkills, users } from "@/db/schema";
 import { ApiError } from "@/lib/api-error";
@@ -43,7 +43,7 @@ export function toPublicUser(user, { withEmail = false } = {}) {
   return result;
 }
 
-function serializeSearchRow(row) {
+function serializeSearchRow(row, skillNames = []) {
   const profile =
     row.bio || row.department || row.year
       ? { bio: row.bio, department: row.department, year: row.year }
@@ -57,6 +57,9 @@ function serializeSearchRow(row) {
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
     profile,
+    // Skills ride along with every search row so the client can match queries
+    // like "React" without a second round trip per profile.
+    skills: skillNames,
   };
 }
 
@@ -101,6 +104,7 @@ export async function createUser({ email, fullName, password, ...fields }) {
       fullName,
       passwordHash,
       username: fields.username ?? null,
+      profilePhoto: fields.profilePhoto ?? null,
       accountType: fields.accountType ?? "student",
       graduationYear: fields.graduationYear ?? null,
       currentRole: fields.currentRole ?? null,
@@ -273,5 +277,30 @@ export async function searchUsers({ query, page, limit, accountType }) {
     .leftJoin(profiles, eq(profiles.userId, users.id))
     .where(where);
 
-  return { users: rows.map(serializeSearchRow), total, page, limit };
+  // Batch-load skills for the page of results; one query instead of N.
+  const userIds = rows.map((row) => row.id);
+  const skillsByUser = new Map();
+
+  if (userIds.length > 0) {
+    const skillRows = await db
+      .select({ userId: userSkills.userId, name: skills.name })
+      .from(userSkills)
+      .innerJoin(skills, eq(skills.id, userSkills.skillId))
+      .where(inArray(userSkills.userId, userIds));
+
+    for (const row of skillRows) {
+      const list = skillsByUser.get(row.userId) ?? [];
+      list.push(row.name);
+      skillsByUser.set(row.userId, list);
+    }
+  }
+
+  return {
+    users: rows.map((row) =>
+      serializeSearchRow(row, skillsByUser.get(row.id) ?? [])
+    ),
+    total,
+    page,
+    limit,
+  };
 }

@@ -44,10 +44,8 @@ export function toClientUser(apiUser) {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     let cancelled = false;
 
     (async () => {
@@ -115,24 +113,6 @@ export function AuthProvider({ children }) {
 
     setUser(null);
   };
-
-  if (!mounted) {
-    return (
-      <AuthContext.Provider
-        value={{
-          user: null,
-          loading: true,
-          isLoggedIn: false,
-          register,
-          login,
-          updateUser,
-          logout,
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    );
-  }
 
   return (
     <AuthContext.Provider

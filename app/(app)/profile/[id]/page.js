@@ -278,7 +278,7 @@ export default function OtherProfilePage() {
     String(user.id) === String(profile.id);
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24 lg:ml-[220px] lg:pb-10">
+    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
 
       {/* Header */}
       <header className="sticky top-0 z-40 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">

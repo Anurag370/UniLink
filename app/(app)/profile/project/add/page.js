@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { useAuth } from "../../../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { request } from "@/lib/api-client";
 
 export default function AddProject() {

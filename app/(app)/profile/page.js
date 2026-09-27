@@ -404,8 +404,8 @@ function ProfileContent() {
           px-4
           backdrop-blur-md
 
-          lg:ml-[220px]
-          min-[1400px]:ml-[240px]
+          
+          
         "
       >
         <button
@@ -445,11 +445,11 @@ function ProfileContent() {
           px-4
           py-6
           sm:px-6
-          lg:ml-[220px]
-          lg:w-[calc(100%-220px)]
+          
+          
           lg:px-8
-          min-[1400px]:ml-[240px]
-          min-[1400px]:w-[calc(100%-240px)]
+          
+          
         "
       >
         <div className="mx-auto w-full max-w-[900px]">

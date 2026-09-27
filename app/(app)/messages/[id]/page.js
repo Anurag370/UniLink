@@ -37,6 +37,7 @@ export default function ChatPage() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
+  const [peerActive, setPeerActive] = useState("offline");
 
   const messagesEndRef = useRef(null);
 
@@ -73,8 +74,7 @@ export default function ChatPage() {
 
     const checkConnection = async () => {
       try {
-        const result = await request(
-          "/api/connections?status=accepted&limit=50"
+        const result = await request(            "/api/connections?status=connected&limit=50"
         );
 
         const found = (result.connections ?? []).some(
@@ -116,6 +116,11 @@ export default function ChatPage() {
           setMessages(
             [...(result.messages ?? [])].reverse()
           );
+
+          setPeerActive(
+            result.peer?.activeState ?? "offline"
+          );
+
           setLoading(false);
         }
       } catch {
@@ -231,7 +236,7 @@ export default function ChatPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 lg:ml-[220px]">
+      <div className="min-h-screen bg-slate-50">
         <main className="flex min-h-screen items-center justify-center">
           <p className="text-sm text-slate-500">
             Loading conversation...
@@ -245,7 +250,7 @@ export default function ChatPage() {
 
   if (!otherUser) {
     return (
-      <div className="min-h-screen bg-slate-50 lg:ml-[220px]">
+      <div className="min-h-screen bg-slate-50">
         <main className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400">
             <User size={28} />
@@ -275,7 +280,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24 lg:ml-[220px] lg:pb-0">
+    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-0">
 
       {/* Header */}
       <header className="sticky top-0 z-40 flex h-[64px] items-center gap-3 border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">
@@ -323,6 +328,25 @@ export default function ChatPage() {
                 ? `@${otherUser.username}`
                 : otherUser.department ||
                   "UniLink user"}
+
+              <span
+                className={
+                  peerActive === "online"
+                    ? "ml-2 inline-flex items-center gap-1 font-semibold text-green-600"
+                    : "ml-2 inline-flex items-center gap-1 text-slate-400"
+                }
+              >
+                <span
+                  className={
+                    peerActive === "online"
+                      ? "size-1.5 rounded-full bg-green-500"
+                      : "size-1.5 rounded-full bg-slate-300"
+                  }
+                />
+                {peerActive === "online"
+                  ? "Online"
+                  : "Offline"}
+              </span>
             </p>
           </div>
         </button>

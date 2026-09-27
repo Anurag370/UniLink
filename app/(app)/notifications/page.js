@@ -220,7 +220,7 @@ export default function NotificationsPage() {
   ).length;
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24 lg:ml-[220px] lg:pb-10">
+    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
         {/* Header */}
         <header className="flex items-center justify-between">

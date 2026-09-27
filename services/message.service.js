@@ -15,10 +15,22 @@ function toPublicMessage(row) {
   };
 }
 
+// A peer counts as "online" when their heartbeat is fresher than this
+// window; requireUser() refreshes the heartbeat at most once a minute.
+const PRESENCE_WINDOW_MS = 5 * 60 * 1000;
+
+function activeStateOf(lastActiveAt) {
+  return lastActiveAt && Date.now() - lastActiveAt < PRESENCE_WINDOW_MS
+    ? "online"
+    : "offline";
+}
+
 function peerProfileKey(user) {
   return {
     id: user.id,
     fullName: user.fullName,
+    profilePhoto: user.profilePhoto ?? null,
+    activeState: activeStateOf(user.lastActiveAt),
     profile: user.profile
       ? {
           bio: user.profile.bio,
@@ -101,8 +113,18 @@ export async function listConversation(userId, otherUserId, { page, limit }) {
 
   const total = await db.$count(messages, between);
 
+  // The thread page polls this endpoint, so the peer's presence rides along
+  // with the messages instead of needing a separate endpoint.
+  const peer = await db.query.users.findFirst({
+    where: (u, { eq }) => eq(u.id, otherUserId),
+    columns: { id: true, lastActiveAt: true },
+  });
+
   return {
     messages: rows.map(toPublicMessage),
+    peer: peer
+      ? { id: peer.id, activeState: activeStateOf(peer.lastActiveAt) }
+      : null,
     total,
     page,
     limit,

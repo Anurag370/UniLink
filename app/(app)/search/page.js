@@ -56,7 +56,9 @@ export default function SearchPage() {
       studyYear: profile.year ?? "",
       profilePhoto: apiUser.profilePhoto ?? "",
       avatar: apiUser.profilePhoto ?? "",
-      skills: [],
+      skills: (apiUser.skills ?? []).map((skill) =>
+        typeof skill === "string" ? skill : skill.name
+      ),
       accountType: apiUser.accountType ?? "student",
     };
   };
@@ -362,11 +364,11 @@ export default function SearchPage() {
           py-4
           backdrop-blur-md
 
-          lg:ml-[220px]
-          lg:w-[calc(100%-220px)]
+          
+          
 
-          min-[1400px]:ml-[240px]
-          min-[1400px]:w-[calc(100%-240px)]
+          
+          
         "
       >
         <div
@@ -422,12 +424,12 @@ export default function SearchPage() {
 
           sm:px-6
 
-          lg:ml-[220px]
-          lg:w-[calc(100%-220px)]
+          
+          
           lg:px-8
 
-          min-[1400px]:ml-[240px]
-          min-[1400px]:w-[calc(100%-240px)]
+          
+          
         "
       >
         <div
@@ -785,7 +787,7 @@ export default function SearchPage() {
                       type="button"
                       onClick={() =>
                         router.push(
-                          `/create/opportunity/${opportunity.id}`
+                          `/opportunities/${opportunity.id}`
                         )
                       }
                       className="

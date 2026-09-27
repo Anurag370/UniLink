@@ -19,6 +19,7 @@ export const registerSchema = z
       "Password must be at least 8 characters"
     ),
     username: z.string().trim().max(50).nullish(),
+    profilePhoto: z.string().max(5_000_000).nullish(),
     department: z.string().trim().max(100).nullish(),
     accountType: z.enum(["student", "alumni"]).default("student"),
     year: z.string().trim().max(50).nullish(),

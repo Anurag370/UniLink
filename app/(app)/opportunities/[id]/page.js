@@ -127,7 +127,7 @@ export default function OpportunityDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-10 lg:ml-[220px] min-[1400px]:ml-[240px]">
+    <div className="min-h-screen bg-slate-50 pb-10">
       {/* HEADER */}
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">
         <div className="flex items-center gap-3">
