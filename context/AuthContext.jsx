@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { request } from "@/lib/api-client";
+import { ApiError, request } from "@/lib/api-client";
 
 const AuthContext = createContext();
 
@@ -53,10 +53,21 @@ export function AuthProvider({ children }) {
         const me = await request("/api/auth/me");
 
         if (!cancelled) {
-          setUser(toClientUser(me));
+          // request() hands back the response envelope, so the user is on
+          // `me.user`. Mapping the envelope itself produced an object with every
+          // field undefined, which only ever showed up after a full page load --
+          // login() has always read `result.user` correctly.
+          setUser(toClientUser(me.user));
         }
-      } catch {
-        if (!cancelled) {
+      } catch (err) {
+        // Only the server saying "you are not authenticated" ends the session.
+        // A 500 from the database, a failed fetch or a cold-start timeout must
+        // not be reported as a logout.
+        if (
+          !cancelled &&
+          err instanceof ApiError &&
+          (err.status === 401 || err.code === "UNAUTHENTICATED")
+        ) {
           setUser(null);
         }
       } finally {
