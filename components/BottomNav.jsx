@@ -67,6 +67,8 @@ function BottomNav() {
 
           max-[380px]:bottom-[7px]
           max-[380px]:w-[calc(100%-14px)]
+
+          lg:hidden
         "
       >
         {/* Home */}

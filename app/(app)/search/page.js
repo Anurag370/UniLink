@@ -398,7 +398,7 @@ export default function SearchPage() {
                   event.target.value
                 )
               }
-              placeholder="Search people, opportunities..."
+              placeholder="Search...      "
               className="
                 w-full
                 bg-transparent
