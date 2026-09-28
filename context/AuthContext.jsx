@@ -53,16 +53,9 @@ export function AuthProvider({ children }) {
         const me = await request("/api/auth/me");
 
         if (!cancelled) {
-          // request() hands back the response envelope, so the user is on
-          // `me.user`. Mapping the envelope itself produced an object with every
-          // field undefined, which only ever showed up after a full page load --
-          // login() has always read `result.user` correctly.
           setUser(toClientUser(me.user));
         }
       } catch (err) {
-        // Only the server saying "you are not authenticated" ends the session.
-        // A 500 from the database, a failed fetch or a cold-start timeout must
-        // not be reported as a logout.
         if (
           !cancelled &&
           err instanceof ApiError &&
@@ -119,7 +112,6 @@ export function AuthProvider({ children }) {
     try {
       await request("/api/auth/logout", { method: "POST" });
     } catch {
-      // Ignore logout failures; clear local state regardless.
     }
 
     setUser(null);

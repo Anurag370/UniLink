@@ -2,8 +2,6 @@ import { describe, expect, it, vi } from "vitest";
 import { ApiError } from "@/lib/api-error";
 import { handleApiError } from "@/lib/response";
 
-// Mirrors the shape node-postgres throws: a DatabaseError carrying a SQLSTATE
-// `code` and the violated constraint name.
 function pgError(code, message, constraint) {
   const err = new Error(message);
   err.code = code;
@@ -47,11 +45,11 @@ describe("handleApiError", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     try {
       for (const code of [
-        "23502", // not_null_violation
-        "23514", // check_violation
-        "22P02", // invalid_text_representation, e.g. bad enum input
-        "22003", // numeric_value_out_of_range
-        "42P01", // undefined_table
+        "23502",
+        "23514",
+        "22P02",
+        "22003",
+        "42P01",
       ]) {
         const res = handleApiError(pgError(code, "some failure"));
         expect(res.status).toBe(500);

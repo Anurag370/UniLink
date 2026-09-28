@@ -14,8 +14,6 @@ import CreateSheet from "./CreateSheet";
 import LoginPrompt from "./LoginPrompt";
 import { useAuth } from "@/context/AuthContext";
 
-// Mobile-only bottom navigation. Desktop gets the left sidebar from
-// components/Sidebar instead (see app/(app)/layout.js).
 function BottomNav() {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
@@ -71,7 +69,6 @@ function BottomNav() {
           lg:hidden
         "
       >
-        {/* Home */}
         <button
           type="button"
           className={navButton}
@@ -81,7 +78,6 @@ function BottomNav() {
           <span>Home</span>
         </button>
 
-        {/* Search */}
         <button
           type="button"
           className={navButton}
@@ -91,7 +87,6 @@ function BottomNav() {
           <span>Search</span>
         </button>
 
-        {/* Create */}
         <button
           type="button"
           aria-label="Create"
@@ -113,7 +108,6 @@ function BottomNav() {
           <Plus size={27} />
         </button>
 
-        {/* Messages */}
         <button
           type="button"
           className={navButton}
@@ -123,7 +117,6 @@ function BottomNav() {
           <span>Messages</span>
         </button>
 
-        {/* Profile */}
         <button
           type="button"
           className={navButton}

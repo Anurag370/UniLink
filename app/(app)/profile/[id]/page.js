@@ -100,7 +100,6 @@ export default function OtherProfilePage() {
     })();
   }, [params?.id, user?.id]);
 
-  // Refresh connection state whenever the page becomes visible again.
   useEffect(() => {
     const handleFocus = () => {
       loadProfile();
@@ -280,7 +279,6 @@ export default function OtherProfilePage() {
   return (
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
 
-      {/* Header */}
       <header className="sticky top-0 z-40 flex h-[60px] items-center border-b border-slate-200 bg-white/95 backdrop-blur-md">
 
         <div className="mx-auto flex w-full max-w-3xl items-center px-4 sm:px-6 lg:px-8">
@@ -316,10 +314,8 @@ export default function OtherProfilePage() {
         </div>
       </header>
 
-      {/* Main */}
       <main className="mx-auto w-full max-w-3xl px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
 
-        {/* Profile */}
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
           <div className="flex flex-col items-center text-center">
@@ -338,7 +334,6 @@ export default function OtherProfilePage() {
               @{username}
             </p>
 
-            {/* Badges */}
             <div className="mt-3 flex flex-wrap justify-center gap-2">
 
               <span className="rounded-lg bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-500">
@@ -358,7 +353,6 @@ export default function OtherProfilePage() {
               )}
             </div>
 
-            {/* Alumni information */}
             {isAlumni &&
               (graduationYear ||
                 currentJob ||
@@ -388,7 +382,6 @@ export default function OtherProfilePage() {
               {bio}
             </p>
 
-            {/* Connection / Message */}
             {!isOwnProfile && (
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
 
@@ -431,7 +424,6 @@ export default function OtherProfilePage() {
               </div>
             )}
 
-            {/* Stats */}
             <div className="mt-6 grid w-full max-w-[420px] grid-cols-2 divide-x divide-slate-200 border-y border-slate-200 py-4">
 
               <div className="flex flex-col items-center">
@@ -456,7 +448,6 @@ export default function OtherProfilePage() {
 
             </div>
 
-            {/* Links */}
             {(github || linkedin) && (
               <div className="mt-5 flex flex-wrap justify-center gap-3">
 
@@ -492,7 +483,6 @@ export default function OtherProfilePage() {
           </div>
         </section>
 
-        {/* About */}
         <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
           <div className="flex items-center gap-3">
@@ -588,7 +578,6 @@ export default function OtherProfilePage() {
           </div>
         </section>
 
-        {/* Skills */}
         <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
           <div className="flex items-center gap-3">
@@ -628,7 +617,6 @@ export default function OtherProfilePage() {
 
         </section>
 
-        {/* Projects */}
         <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
           <div className="flex items-center gap-3">

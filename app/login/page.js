@@ -30,9 +30,6 @@ export default function Login() {
       return;
     }
 
-    // Read at submit time, not on mount: the query cannot change while the form
-    // is on screen, and it keeps ?next= out of React state entirely. Resolves to
-    // "/" when absent, and rejects off-site values.
     router.push(readNextParam());
   };
 

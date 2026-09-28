@@ -82,7 +82,6 @@ export default function Opportunities() {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-10">
-      {/* HEADER */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 px-4 py-4 backdrop-blur-md sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between">
           <div>
@@ -110,9 +109,7 @@ export default function Opportunities() {
         </div>
       </header>
 
-      {/* CONTENT */}
       <main className="mx-auto max-w-[1100px] px-4 pt-6 sm:px-6 lg:px-8">
-        {/* SEARCH */}
         <div className="mb-6 flex h-11 w-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-4">
           <Search
             size={18}
@@ -130,7 +127,6 @@ export default function Opportunities() {
           />
         </div>
 
-        {/* EMPTY STATE */}
         {filteredOpportunities.length === 0 && (
           <div className="rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center">
             <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-500">
@@ -161,7 +157,6 @@ export default function Opportunities() {
           </div>
         )}
 
-        {/* OPPORTUNITY GRID */}
         {filteredOpportunities.length > 0 && (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {filteredOpportunities.map(
@@ -181,7 +176,6 @@ export default function Opportunities() {
                   }}
                   className="cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(15,23,42,0.08)]"
                 >
-                  {/* BANNER */}
                   {opportunity.banner ? (
                     <img
                       src={opportunity.banner}
@@ -195,17 +189,14 @@ export default function Opportunities() {
                   )}
 
                   <div className="p-5">
-                    {/* TYPE */}
                     <span className="inline-flex rounded-full bg-indigo-50 px-2.5 py-1 text-[10px] font-semibold text-indigo-600">
                       {opportunity.type}
                     </span>
 
-                    {/* TITLE */}
                     <h2 className="mt-3 line-clamp-2 text-base font-bold text-slate-900">
                       {opportunity.title}
                     </h2>
 
-                    {/* DATE */}
                     <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
                       <CalendarDays
                         size={15}
@@ -219,7 +210,6 @@ export default function Opportunities() {
                       </span>
                     </div>
 
-                    {/* LOCATION */}
                     {opportunity.location && (
                       <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
                         <MapPin
@@ -233,12 +223,10 @@ export default function Opportunities() {
                       </div>
                     )}
 
-                    {/* DESCRIPTION */}
                     <p className="mt-4 line-clamp-3 text-xs leading-5 text-slate-600">
                       {opportunity.description}
                     </p>
 
-                    {/* OPEN DETAIL */}
                     <div className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-indigo-50 px-4 py-2.5 text-xs font-semibold text-indigo-600">
                       View details
                       <ArrowRight size={14} />

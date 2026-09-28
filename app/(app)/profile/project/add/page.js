@@ -60,7 +60,6 @@ export default function AddProject() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex h-[64px] w-full max-w-[1000px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
@@ -102,9 +101,7 @@ export default function AddProject() {
         </p>
       )}
 
-      {/* PAGE */}
       <main className="mx-auto w-full max-w-[1000px] px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
-        {/* PAGE INTRO */}
         <div className="mb-8">
           <div className="flex items-center gap-3">
             <div className="flex size-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-500">
@@ -129,9 +126,7 @@ export default function AddProject() {
           onSubmit={handleSubmit}
           className="space-y-6"
         >
-          {/* TOP GRID */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-            {/* PROJECT INFORMATION */}
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-6">
                 <h3 className="text-base font-semibold text-slate-900">
@@ -143,7 +138,6 @@ export default function AddProject() {
                 </p>
               </div>
 
-              {/* PROJECT NAME */}
               <div className="mb-5">
                 <label className="mb-2 block text-xs font-semibold text-slate-800">
                   Project Name
@@ -177,7 +171,6 @@ export default function AddProject() {
                 />
               </div>
 
-              {/* DESCRIPTION */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
                   <label className="text-xs font-semibold text-slate-800">
@@ -221,9 +214,7 @@ export default function AddProject() {
               </div>
             </section>
 
-            {/* RIGHT COLUMN */}
             <div className="space-y-6">
-              {/* TECHNOLOGIES */}
               <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="mb-6">
                   <h3 className="text-base font-semibold text-slate-900">
@@ -271,7 +262,6 @@ export default function AddProject() {
                   Separate technologies with commas.
                 </p>
 
-                {/* PREVIEW */}
                 {technologies.trim() && (
                   <div className="mt-4 flex flex-wrap gap-2">
                     {technologies
@@ -290,7 +280,6 @@ export default function AddProject() {
                 )}
               </section>
 
-              {/* LINKS */}
               <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="mb-6">
                   <h3 className="text-base font-semibold text-slate-900">
@@ -302,7 +291,6 @@ export default function AddProject() {
                   </p>
                 </div>
 
-                {/* GITHUB */}
                 <div className="mb-5">
                   <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-800">
                     <Code2 size={15} />
@@ -336,7 +324,6 @@ export default function AddProject() {
                   />
                 </div>
 
-                {/* DEMO */}
                 <div>
                   <label className="mb-2 flex items-center gap-2 text-xs font-semibold text-slate-800">
                     <ExternalLink size={15} />
@@ -373,7 +360,6 @@ export default function AddProject() {
             </div>
           </div>
 
-          {/* DESKTOP SUBMIT AREA */}
           <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <div>
               <p className="text-sm font-semibold text-slate-900">

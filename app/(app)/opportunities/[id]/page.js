@@ -67,7 +67,6 @@ export default function OpportunityDetails() {
         alert("Link copied to clipboard.");
       }
     } catch {
-      // User cancelled sharing.
     }
   };
 
@@ -128,7 +127,6 @@ export default function OpportunityDetails() {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-10">
-      {/* HEADER */}
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <button
@@ -155,9 +153,7 @@ export default function OpportunityDetails() {
         </button>
       </header>
 
-      {/* CONTENT */}
       <main className="mx-auto w-full max-w-3xl px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
-        {/* BANNER */}
         {opportunity.banner ? (
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
             <img
@@ -175,9 +171,7 @@ export default function OpportunityDetails() {
           </div>
         )}
 
-        {/* MAIN CARD */}
         <section className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
-          {/* TYPE */}
           <div className="flex flex-wrap items-center gap-2">
             {opportunity.type && (
               <span className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] font-semibold text-indigo-600">
@@ -186,12 +180,10 @@ export default function OpportunityDetails() {
             )}
           </div>
 
-          {/* TITLE */}
           <h2 className="mt-4 text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl">
             {opportunity.title}
           </h2>
 
-          {/* META */}
           <div className="mt-5 flex flex-col gap-3 border-y border-slate-100 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
             {opportunity.date && (
               <div className="flex items-center gap-2 text-slate-600">
@@ -229,7 +221,6 @@ export default function OpportunityDetails() {
             )}
           </div>
 
-          {/* DESCRIPTION */}
           <div className="mt-6">
             <h3 className="text-sm font-semibold text-slate-900">
               About this opportunity
@@ -240,7 +231,6 @@ export default function OpportunityDetails() {
             </p>
           </div>
 
-          {/* ACTIONS */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             {opportunity.link && (
               <a

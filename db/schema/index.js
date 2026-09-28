@@ -12,11 +12,6 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
-// Timestamps are stored as epoch milliseconds rather than `timestamptz` so the
-// JSON API keeps emitting numbers. `mode: "number"` asks the driver to parse
-// int8 into a JS number (exact well past 2^53), which keeps `Date.now()`
-// round-tripping unchanged. The column must be bigint, not integer: epoch
-// milliseconds overflow int4 by three orders of magnitude.
 const now = sql`(extract(epoch from now()) * 1000)::bigint`;
 
 const timestamps = {
@@ -54,8 +49,6 @@ export const users = pgTable(
     graduationYear: integer("graduation_year"),
     currentRole: text("current_role"),
     company: text("company"),
-    // Presence heartbeat, written at most once a minute by requireUser().
-    // Nullable: never-active accounts are simply "offline".
     lastActiveAt: bigint("last_active_at", { mode: "number" }),
     ...timestamps,
   },
@@ -74,8 +67,6 @@ export const profiles = pgTable(
     year: text("year"),
     ...timestamps,
   },
-  // The user <-> profile relationship is 1:1 and enforced here rather than only
-  // in application code.
   (table) => [uniqueIndex("profiles_user_unique").on(table.userId)]
 );
 
@@ -85,8 +76,6 @@ export const skills = pgTable(
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
   },
-  // Uniqueness is case-insensitive because lookups go through `lower(name)`.
-  // A plain unique index on `name` would let "React" and "react" coexist.
   (table) => [uniqueIndex("skills_name_lower_unique").on(sql`lower(${table.name})`)]
 );
 
@@ -321,10 +310,6 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   }),
   skills: many(userSkills),
   posts: many(posts),
-  // A connection is undirected from either side, so `connections` has two
-  // distinct paths back to users. They must be declared separately and matched
-  // to `requester` / `addressee` in connectionsRelations, otherwise the
-  // relation is ambiguous and `db.query.users` cannot resolve it.
   sentConnectionRequests: many(connections, { relationName: "requester" }),
   receivedConnectionRequests: many(connections, { relationName: "addressee" }),
   projects: many(projects, { relationName: "ownedProjects" }),

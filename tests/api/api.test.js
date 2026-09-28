@@ -184,9 +184,6 @@ describe("users", () => {
   });
 
   test("GET /api/users?query= is case-insensitive (Postgres ILIKE regression)", async () => {
-    // SQLite's LIKE is case-insensitive for ASCII by default, so this passed
-    // there without an explicit operator. Postgres LIKE is case-sensitive, so
-    // the search has to use ILIKE to keep the old behaviour.
     for (const query of ["bob", "BOB", "bOb"]) {
       const data = expectOk(
         await state.req("GET", `/api/users?query=${query}`, {
@@ -1171,10 +1168,6 @@ describe("posts: likes & comments", () => {
   });
 
   test("concurrent likes from different users do not lose increments", async () => {
-    // The counter is maintained by a read-modify-write in application code, so
-    // it is only safe if the update is a single atomic SQL statement. Two
-    // overlapping requests that each read 0 and write 1 would lose one increment
-    // under the old implementation.
     const created = expectOk(
       await state.req("POST", "/api/posts", {
         token: state.alice.token,

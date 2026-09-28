@@ -84,10 +84,6 @@ export default function ConnectionsPage() {
     })();
   }, [user, loading]);
 
-  /*
-   * Keep the page synchronized if another part of the app
-   * changes the connection data.
-   */
   useEffect(() => {
     if (!user?.id) return;
 
@@ -196,10 +192,6 @@ export default function ConnectionsPage() {
     }
   };
 
-  /*
-   * Don't decide that the user isn't logged in while
-   * AuthContext is still initializing.
-   */
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -255,7 +247,6 @@ export default function ConnectionsPage() {
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
 
-        {/* Header */}
         <header className="flex items-center gap-4">
           <button
             type="button"
@@ -276,7 +267,6 @@ export default function ConnectionsPage() {
           </div>
         </header>
 
-        {/* Request count */}
         {requests.length > 0 && (
           <div className="mt-6">
             <span className="rounded-full bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-600">
@@ -288,7 +278,6 @@ export default function ConnectionsPage() {
           </div>
         )}
 
-        {/* Requests */}
         <section className="mt-5">
           {requests.length === 0 ? (
         <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
@@ -354,7 +343,6 @@ export default function ConnectionsPage() {
                   >
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-                      {/* User */}
                       <button
                         type="button"
                         onClick={() =>
@@ -405,7 +393,6 @@ export default function ConnectionsPage() {
                         </div>
                       </button>
 
-                      {/* Actions */}
                       <div className="flex shrink-0 gap-2">
                         <button
                           type="button"

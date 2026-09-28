@@ -15,8 +15,6 @@ function toPublicMessage(row) {
   };
 }
 
-// A peer counts as "online" when their heartbeat is fresher than this
-// window; requireUser() refreshes the heartbeat at most once a minute.
 const PRESENCE_WINDOW_MS = 5 * 60 * 1000;
 
 function activeStateOf(lastActiveAt) {
@@ -113,8 +111,6 @@ export async function listConversation(userId, otherUserId, { page, limit }) {
 
   const total = await db.$count(messages, between);
 
-  // The thread page polls this endpoint, so the peer's presence rides along
-  // with the messages instead of needing a separate endpoint.
   const peer = await db.query.users.findFirst({
     where: (u, { eq }) => eq(u.id, otherUserId),
     columns: { id: true, lastActiveAt: true },
@@ -148,10 +144,6 @@ export async function getUnreadCount(userId) {
 }
 
 export async function listConversations(userId, { page, limit }) {
-  // Peers are discovered with a single CASE expression rather than a UNION of
-  // the two directions, so the result has one real column name to order and map
-  // by. The previous version called `db.execute({ sql, args })`, which is not a
-  // method on this dialect at all.
   const peers = () =>
     db
       .selectDistinct({
@@ -175,10 +167,7 @@ export async function listConversations(userId, { page, limit }) {
     return { conversations: [], total: Number(total), page, limit };
   }
 
-  // One query per concern instead of three per peer.
   const peerParam = (id) => sql`${id}`;
-  // sql.join concatenates its chunks verbatim, so the separator is explicit:
-  // without it two peer ids render as "$1$2" and Postgres reports a syntax error.
   const peerList = sql.join(peerIds.map(peerParam), sql`, `);
 
   const [peerUsers, latestResult, unreadRows] = await Promise.all([
@@ -186,9 +175,6 @@ export async function listConversations(userId, { page, limit }) {
       where: (u, { inArray }) => inArray(u.id, peerIds),
       with: { profile: true },
     }),
-    // DISTINCT ON keeps the newest message per peer in a single pass. It has no
-    // Drizzle builder equivalent, so it goes through the tagged template, which
-    // binds parameters as numbered placeholders.
     db.execute(sql`
       select distinct on (peer_id)
         peer_id, id, sender_id, receiver_id, text, read, created_at, updated_at
@@ -216,8 +202,6 @@ export async function listConversations(userId, { page, limit }) {
   ]);
 
   const usersById = new Map(peerUsers.map((peer) => [peer.id, peer]));
-  // This one query is raw, so its rows arrive snake_cased straight from the
-  // driver. They are reshaped to the camelCase keys toPublicMessage expects.
   const latestByPeer = new Map(
     latestResult.rows.map((row) => [
       Number(row.peer_id),
@@ -235,7 +219,6 @@ export async function listConversations(userId, { page, limit }) {
     unreadRows.map((row) => [row.peerId, Number(row.count)])
   );
 
-  // Preserve the descending peer_id ordering the query imposed.
   const conversations = peerIds
     .map((peerId) => {
       const peer = usersById.get(peerId);

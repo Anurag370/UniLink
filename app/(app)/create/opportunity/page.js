@@ -26,16 +26,11 @@ export default function CreateOpportunity() {
   const [publishing, setPublishing] = useState(false);
   const [publishError, setPublishError] = useState("");
 
-  /*
-   * Compress the selected image before storing it.
-   * This prevents localStorage from filling up too quickly.
-   */
   const handleBannerChange = (event) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
 
-    // Don't allow extremely large source files.
     if (file.size > 10 * 1024 * 1024) {
       alert("Please select an image smaller than 10 MB.");
       return;
@@ -55,10 +50,6 @@ export default function CreateOpportunity() {
         let width = image.width;
         let height = image.height;
 
-        /*
-         * Scale the image down while maintaining
-         * its original aspect ratio.
-         */
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
           width = maxWidth;
@@ -86,12 +77,6 @@ export default function CreateOpportunity() {
           height
         );
 
-        /*
-         * Convert to compressed JPEG.
-         *
-         * 0.65 = good balance between quality
-         * and localStorage size.
-         */
         const compressedImage =
           canvas.toDataURL(
             "image/jpeg",
@@ -164,7 +149,6 @@ export default function CreateOpportunity() {
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="mx-auto w-full max-w-3xl">
-      {/* HEADER */}
       <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/96 px-4 backdrop-blur-md sm:px-6 lg:px-8">
         <button
           type="button"
@@ -195,7 +179,6 @@ export default function CreateOpportunity() {
       )}
 
       <main className="px-4 pt-6 pb-6 sm:px-6 lg:px-8">
-        {/* INTRO CARD */}
         <div className="mb-6 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-[15px]">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-500">
             <CalendarDays size={24} />
@@ -213,7 +196,6 @@ export default function CreateOpportunity() {
           </div>
         </div>
 
-        {/* BANNER */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             Banner Image
@@ -260,7 +242,6 @@ export default function CreateOpportunity() {
           )}
         </div>
 
-        {/* TITLE */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             Title *
@@ -277,7 +258,6 @@ export default function CreateOpportunity() {
           />
         </div>
 
-        {/* TYPE */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             Type *
@@ -299,7 +279,6 @@ export default function CreateOpportunity() {
           </select>
         </div>
 
-        {/* CUSTOM TYPE */}
         {type === "Other" && (
           <div className="relative mb-[18px]">
             <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
@@ -318,7 +297,6 @@ export default function CreateOpportunity() {
           </div>
         )}
 
-        {/* DATE */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             Date *
@@ -334,7 +312,6 @@ export default function CreateOpportunity() {
           />
         </div>
 
-        {/* LOCATION */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             <MapPin size={14} />
@@ -352,7 +329,6 @@ export default function CreateOpportunity() {
           />
         </div>
 
-        {/* DESCRIPTION */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             Description *
@@ -373,7 +349,6 @@ export default function CreateOpportunity() {
           </span>
         </div>
 
-        {/* LINK */}
         <div className="relative mb-[18px]">
           <label className="mb-[7px] flex items-center gap-[5px] font-semibold text-slate-900 text-[11px]">
             <LinkIcon size={14} />

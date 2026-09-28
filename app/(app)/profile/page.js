@@ -72,9 +72,6 @@ function ProfileContent() {
   const [showLoginPrompt, setShowLoginPrompt] =
     useState(false);
 
-  /*
-   * LOAD PROFILE
-   */
   useEffect(() => {
     let cancelled = false;
 
@@ -168,11 +165,6 @@ function ProfileContent() {
     isOwnProfile,
   ]);
 
-  /*
-   * RELOAD PROJECTS WHEN PAGE BECOMES VISIBLE
-   *
-   * Useful after returning from /profile/project/add.
-   */
   useEffect(() => {
     if (!user || !isLoggedIn) return;
 
@@ -190,7 +182,6 @@ function ProfileContent() {
 
         setProjects(result.projects ?? []);
       } catch {
-        // Keep the previous list on error.
       }
     };
 
@@ -208,17 +199,11 @@ function ProfileContent() {
     profileId,
   ]);
 
-  /*
-   * LOGOUT
-   */
   const handleLogout = () => {
     logout();
     router.push("/");
   };
 
-  /*
-   * CONNECT
-   */
   const handleConnect = async () => {
     if (!user || !profile) return;
 
@@ -230,13 +215,9 @@ function ProfileContent() {
 
       setConnectionStatus("pending");
     } catch {
-      // Leave the current status untouched on error.
     }
   };
 
-  /*
-   * LOADING
-   */
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
@@ -254,9 +235,6 @@ function ProfileContent() {
     );
   }
 
-  /*
-   * NOT LOGGED IN
-   */
   if (!isLoggedIn) {
     return (
       <>
@@ -296,9 +274,6 @@ function ProfileContent() {
     );
   }
 
-  /*
-   * PROFILE NOT FOUND
-   */
   if (!profile) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">
@@ -324,9 +299,6 @@ function ProfileContent() {
     );
   }
 
-  /*
-   * PROFILE DATA
-   */
   const profilePhoto =
     profile.profilePhoto ||
     profile.avatar ||
@@ -364,11 +336,6 @@ function ProfileContent() {
     ? profile.skills
     : [];
 
-  /*
-   * NOTE:
-   * Projects now come from the API,
-   * not from profile.projects.
-   */
 
   const github =
     profile.github ||
@@ -392,7 +359,6 @@ function ProfileContent() {
   return (
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
 
-      {/* HEADER */}
 
       <header
         className="
@@ -440,7 +406,6 @@ function ProfileContent() {
         </div>
       </header>
 
-      {/* MAIN */}
 
       <main
         className="
@@ -453,7 +418,6 @@ function ProfileContent() {
       >
         <div className="w-full">
 
-          {/* PROFILE CARD */}
 
           <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
             <div className="flex flex-col items-center text-center">
@@ -504,7 +468,6 @@ function ProfileContent() {
                 {bio}
               </p>
 
-              {/* CONNECTION */}
 
               {!isOwnProfile && (
                 <div className="mt-5">
@@ -545,7 +508,6 @@ function ProfileContent() {
                 </div>
               )}
 
-              {/* STATS */}
 
               <div className="mt-6 grid w-full max-w-[460px] grid-cols-2 divide-x divide-slate-200 border-y border-slate-200 py-4">
 
@@ -571,7 +533,6 @@ function ProfileContent() {
 
               </div>
 
-              {/* LINKS */}
 
               {(github || linkedin) && (
                 <div className="mt-5 flex flex-wrap justify-center gap-3">
@@ -608,7 +569,6 @@ function ProfileContent() {
             </div>
           </section>
 
-          {/* ABOUT */}
 
           <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
@@ -679,7 +639,6 @@ function ProfileContent() {
             </div>
           </section>
 
-          {/* SKILLS */}
 
           <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
@@ -722,7 +681,6 @@ function ProfileContent() {
 
           </section>
 
-          {/* PROJECTS */}
 
           <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
@@ -917,7 +875,6 @@ function ProfileContent() {
 
           </section>
 
-          {/* ALUMNI EXPERIENCE */}
 
           {isAlumni && (
             <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
@@ -965,7 +922,6 @@ function ProfileContent() {
             </section>
           )}
 
-          {/* LOGOUT */}
 
           {isOwnProfile && (
             <button

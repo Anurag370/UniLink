@@ -1,9 +1,5 @@
 import { z } from "zod";
 
-// bcrypt only uses the first 72 bytes of the input, silently ignoring the
-// rest. Longer passwords would let two different values that share a 72-byte
-// prefix authenticate as the same credential, so we cap both endpoints at the
-// byte limit (character counts are not enough: multibyte characters exceed it).
 const passwordRule = z
   .string()
   .refine((value) => new TextEncoder().encode(value).byteLength <= 72, {

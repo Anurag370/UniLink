@@ -132,7 +132,6 @@ export default function EditProfile() {
   return (
     <div className="min-h-screen bg-slate-50">
 
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
 
@@ -151,15 +150,12 @@ export default function EditProfile() {
         </div>
       </header>
 
-      {/* Main */}
       <main className="mx-auto w-full max-w-6xl px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
 
-        {/* Profile Preview */}
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
 
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
 
-            {/* Avatar */}
             <div className="relative shrink-0 self-center sm:self-auto">
 
               <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white shadow-sm sm:h-24 sm:w-24">
@@ -191,7 +187,6 @@ export default function EditProfile() {
 
             </div>
 
-            {/* User Info */}
             <div className="text-center sm:text-left">
 
               <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl">
@@ -219,14 +214,12 @@ export default function EditProfile() {
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
-            {/* Basic Information */}
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
 
               <h2 className="mb-5 text-lg font-semibold text-slate-900">
                 Basic Information
               </h2>
 
-              {/* Name */}
               <div className="mb-5">
 
                 <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -246,7 +239,6 @@ export default function EditProfile() {
 
               </div>
 
-              {/* Bio */}
               <div>
 
                 <div className="mb-2 flex items-center justify-between">
@@ -276,7 +268,6 @@ export default function EditProfile() {
 
             </section>
 
-            {/* Skills */}
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
 
               <h2 className="mb-5 text-lg font-semibold text-slate-900">
@@ -322,7 +313,6 @@ export default function EditProfile() {
 
             </section>
 
-            {/* Alumni Information */}
             {isAlumni && (
               <section className="rounded-2xl border border-violet-100 bg-white p-5 shadow-sm sm:p-6">
 
@@ -344,7 +334,6 @@ export default function EditProfile() {
 
                 </div>
 
-                {/* Graduation Year */}
                 <div className="mb-5">
 
                   <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -371,7 +360,6 @@ export default function EditProfile() {
 
                 </div>
 
-                {/* Current Role */}
                 <div className="mb-5">
 
                   <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
@@ -393,7 +381,6 @@ export default function EditProfile() {
 
                 </div>
 
-                {/* Company */}
                 <div>
 
                   <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -415,14 +402,12 @@ export default function EditProfile() {
               </section>
             )}
 
-            {/* Social Links */}
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
 
               <h2 className="mb-5 text-lg font-semibold text-slate-900">
                 Social Links
               </h2>
 
-              {/* GitHub */}
               <div className="mb-5">
 
                 <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
@@ -442,7 +427,6 @@ export default function EditProfile() {
 
               </div>
 
-              {/* LinkedIn */}
               <div>
 
                 <label className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
@@ -466,7 +450,6 @@ export default function EditProfile() {
 
           </div>
 
-          {/* Save */}
           <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
 
             <button

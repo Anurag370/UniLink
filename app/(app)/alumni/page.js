@@ -94,7 +94,6 @@ export default function AlumniPage() {
     }
   };
 
-  // Load connection statuses
   useEffect(() => {
     if (!user) return;
 
@@ -150,7 +149,6 @@ export default function AlumniPage() {
         [personId]: "pending",
       }));
     } catch {
-      // Ignore failed requests locally.
     }
   };
 
@@ -206,7 +204,6 @@ export default function AlumniPage() {
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
 
-        {/* Header */}
         <header className="flex items-center gap-4">
           <button
             type="button"
@@ -227,7 +224,6 @@ export default function AlumniPage() {
           </div>
         </header>
 
-        {/* Search */}
         <div className="relative mt-6">
           <Search
             size={18}
@@ -245,7 +241,6 @@ export default function AlumniPage() {
           />
         </div>
 
-        {/* Count */}
         <div className="mt-5 flex items-center gap-2 text-sm text-slate-500">
           <Users size={16} />
 
@@ -257,7 +252,6 @@ export default function AlumniPage() {
           </span>
         </div>
 
-        {/* Alumni */}
         <section className="mt-4">
           {filteredAlumni.length === 0 ? (
         <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
@@ -296,7 +290,6 @@ export default function AlumniPage() {
                   >
                     <div className="flex items-start gap-4">
 
-                      {/* Avatar */}
                       <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-indigo-500 to-violet-500">
                         {person.profilePhoto ? (
                           <img
@@ -317,7 +310,6 @@ export default function AlumniPage() {
                         )}
                       </div>
 
-                      {/* Info */}
                       <div className="min-w-0 flex-1">
                         <h2 className="truncate text-base font-semibold text-slate-900">
                           {person.name ||
@@ -344,7 +336,6 @@ export default function AlumniPage() {
                       </div>
                     </div>
 
-                    {/* Professional Info */}
                     {(person.currentRole ||
                       person.company ||
                       person.location) && (
@@ -388,15 +379,12 @@ export default function AlumniPage() {
                       </div>
                     )}
 
-                    {/* Bottom Row */}
                     <div className="mt-4 flex items-center justify-between gap-3">
 
-                      {/* Alumni Badge */}
                       <span className="inline-flex rounded-full bg-violet-50 px-3 py-1 text-[11px] font-semibold text-violet-600">
                         🎓 Alumni
                       </span>
 
-                      {/* Connection Button */}
                       {!isOwnProfile && (
                         <>
                           {status === "none" && (

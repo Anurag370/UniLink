@@ -104,7 +104,6 @@ function PostCard({ post }) {
       setLiked(result.liked);
       setLikeCount(result.likes);
     } catch {
-      // Ignore and keep previous state.
     }
   };
 
@@ -178,10 +177,8 @@ function PostCard({ post }) {
 
   return (
     <>
-      {/* POST */}
       <article className="w-full overflow-hidden rounded-[14px] border border-slate-200 bg-white p-[14px] shadow-[0_2px_8px_rgba(15,23,42,0.04)] mt-3 mb-3 max-md:rounded-[15px] max-[380px]:p-3 lg:rounded-2xl lg:p-4">
 
-        {/* POST HEADER */}
         <div className="flex items-center justify-between">
           <div className="flex min-w-0 items-center gap-[11px]">
 
@@ -218,14 +215,12 @@ function PostCard({ post }) {
           </button>
         </div>
 
-        {/* POST CONTENT */}
         <div className="mt-[14px] pb-1">
           <p className="text-slate-900 text-sm leading-[1.55] [overflow-wrap:anywhere]">
             {post.content}
           </p>
         </div>
 
-        {/* POST IMAGE */}
         {post.image && (
           <img
             className="mt-3 block aspect-[16/10] w-full max-h-[600px] rounded-[14px] object-cover max-md:max-h-[500px] lg:max-h-[650px] lg:aspect-[4/5]"
@@ -234,12 +229,10 @@ function PostCard({ post }) {
           />
         )}
 
-        {/* ACTION BAR */}
         <div className="mt-3 flex items-center justify-between border-t border-slate-200 pt-3">
 
           <div className="flex items-center gap-[18px]">
 
-            {/* LIKE */}
             <button
               type="button"
               className={`flex items-center gap-1.5 p-[3px] transition active:scale-90 ${
@@ -257,7 +250,6 @@ function PostCard({ post }) {
               <span>{likeCount}</span>
             </button>
 
-            {/* COMMENT */}
             <button
               type="button"
               className="flex items-center gap-1.5 p-[3px] text-slate-500 transition hover:text-slate-900 active:scale-90"
@@ -268,7 +260,6 @@ function PostCard({ post }) {
               <span>{commentCount}</span>
             </button>
 
-            {/* SHARE */}
             <button
               type="button"
               className="flex items-center gap-1.5 p-[3px] text-slate-500 transition hover:text-slate-900 active:scale-90"
@@ -278,7 +269,6 @@ function PostCard({ post }) {
             </button>
           </div>
 
-          {/* BOOKMARK */}
           <button
             type="button"
             className={`flex items-center gap-1.5 p-[3px] transition active:scale-90 ${
@@ -296,12 +286,10 @@ function PostCard({ post }) {
         </div>
       </article>
 
-      {/* COMMENTS MODAL */}
       {showComments && (
         <div className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-900/40 backdrop-blur-sm sm:items-center sm:px-4">
           <div className="flex max-h-[80vh] w-full flex-col overflow-hidden rounded-t-2xl bg-white sm:max-w-lg sm:rounded-2xl">
 
-            {/* HEADER */}
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
               <div>
                 <h2 className="font-semibold text-slate-900">
@@ -322,7 +310,6 @@ function PostCard({ post }) {
               </button>
             </div>
 
-            {/* COMMENTS */}
             <div className="min-h-[180px] flex-1 overflow-y-auto px-5 py-4">
 
               {commentsLoading ? (
@@ -382,7 +369,6 @@ function PostCard({ post }) {
               )}
             </div>
 
-            {/* COMMENT INPUT */}
             <div className="border-t border-slate-100 p-4">
               {commentError && (
                 <p className="mb-2 text-xs text-red-500">
@@ -424,7 +410,6 @@ function PostCard({ post }) {
         </div>
       )}
 
-      {/* SHARE MODAL */}
       {showShare && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 px-4 backdrop-blur-sm">
           <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-2xl">
@@ -476,7 +461,6 @@ function PostCard({ post }) {
         </div>
       )}
 
-      {/* LOGIN PROMPT */}
       <LoginPrompt
         isOpen={showLoginPrompt}
         onClose={() => setShowLoginPrompt(false)}

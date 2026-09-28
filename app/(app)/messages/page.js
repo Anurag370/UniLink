@@ -222,7 +222,6 @@ export default function MessagesPage() {
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
 
-        {/* HEADER */}
         <header className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <button
@@ -243,7 +242,6 @@ export default function MessagesPage() {
             </div>
           </div>
 
-          {/* NEW MESSAGE */}
           <button
             type="button"
             onClick={() => {
@@ -259,7 +257,6 @@ export default function MessagesPage() {
           </button>
         </header>
 
-        {/* SEARCH */}
         <div className="relative mt-6">
           <Search
             size={18}
@@ -277,7 +274,6 @@ export default function MessagesPage() {
           />
         </div>
 
-        {/* CONVERSATIONS */}
         <section className="mt-5">
           {filteredConversations.length === 0 ? (
             <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
@@ -334,7 +330,6 @@ export default function MessagesPage() {
                       }
                       className="flex w-full items-center gap-3 border-b border-slate-100 p-4 text-left transition last:border-b-0 hover:bg-slate-50"
                     >
-                      {/* AVATAR */}
                       <div className="relative shrink-0">
                         {photo ? (
                           <img
@@ -358,7 +353,6 @@ export default function MessagesPage() {
                         )}
                       </div>
 
-                      {/* CONTENT */}
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-3">
                           <h3
@@ -407,12 +401,10 @@ export default function MessagesPage() {
         </section>
       </main>
 
-      {/* NEW MESSAGE MODAL */}
       {showNewMessage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 px-4 backdrop-blur-sm">
           <div className="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
             
-            {/* MODAL HEADER */}
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
               <div>
                 <h2 className="text-base font-semibold text-slate-900">
@@ -433,7 +425,6 @@ export default function MessagesPage() {
               </button>
             </div>
 
-            {/* SEARCH PEOPLE */}
             <div className="relative px-5 pt-4">
               <Search
                 size={17}
@@ -452,7 +443,6 @@ export default function MessagesPage() {
               />
             </div>
 
-            {/* PEOPLE */}
             <div className="max-h-[400px] overflow-y-auto px-5 pb-5 pt-3">
               {filteredPeople.length === 0 ? (
                 <div className="py-10 text-center">

@@ -84,7 +84,6 @@ export default function NotificationsPage() {
         method: "PATCH",
       });
     } catch {
-      // Ignore failures; navigation should still proceed.
     }
 
     if (notification.link) {
@@ -105,7 +104,6 @@ export default function NotificationsPage() {
         method: "POST",
       });
     } catch {
-      // Ignore failures.
     }
   };
 
@@ -124,7 +122,6 @@ export default function NotificationsPage() {
         method: "DELETE",
       });
     } catch {
-      // Ignore failures.
     }
   };
 
@@ -136,7 +133,6 @@ export default function NotificationsPage() {
         method: "DELETE",
       });
     } catch {
-      // Ignore failures.
     }
   };
 
@@ -222,7 +218,6 @@ export default function NotificationsPage() {
   return (
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pt-10">
-        {/* Header */}
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -258,7 +253,6 @@ export default function NotificationsPage() {
           )}
         </header>
 
-        {/* Mobile actions */}
         {notifications.length > 0 && (
           <div className="mt-5 flex gap-2 sm:hidden">
             <button
@@ -278,7 +272,6 @@ export default function NotificationsPage() {
           </div>
         )}
 
-        {/* Notifications */}
         <section className="mt-6">
           {notifications.length === 0 ? (
         <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
@@ -311,7 +304,6 @@ export default function NotificationsPage() {
                       : "bg-white"
                   }`}
                 >
-                  {/* Icon */}
                   <div
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${getIconStyle(
                       notification.type
@@ -320,7 +312,6 @@ export default function NotificationsPage() {
                     {getIcon(notification.type)}
                   </div>
 
-                  {/* Content */}
                   <div className="min-w-0 flex-1 pr-8">
                     <p className="text-sm leading-5 text-slate-700">
                       {notification.message}
@@ -333,12 +324,10 @@ export default function NotificationsPage() {
                     )}
                   </div>
 
-                  {/* Unread indicator */}
                   {!notification.read && (
                     <span className="absolute right-4 top-5 h-2.5 w-2.5 rounded-full bg-indigo-500" />
                   )}
 
-                  {/* Delete */}
                   <button
                     onClick={(event) =>
                       handleDelete(
@@ -357,7 +346,6 @@ export default function NotificationsPage() {
           )}
         </section>
 
-        {/* Desktop clear */}
         {notifications.length > 0 && (
           <div className="mt-4 hidden justify-end sm:flex">
             <button

@@ -57,8 +57,6 @@ function serializeSearchRow(row, skillNames = []) {
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
     profile,
-    // Skills ride along with every search row so the client can match queries
-    // like "React" without a second round trip per profile.
     skills: skillNames,
   };
 }
@@ -202,9 +200,6 @@ async function ensureSkill(client, name) {
   if (existing) {
     return existing.id;
   }
-  // Two concurrent profile updates can race to create the same new skill.
-  // onConflictDoNothing turns the losing insert into a no-op instead of a
-  // raw unique-constraint error; we then resolve the winning row's id.
   const [created] = await client
     .insert(skills)
     .values({ name: trimmed })
@@ -222,16 +217,10 @@ async function ensureSkill(client, name) {
 }
 
 function escapeLike(input) {
-  // Escape LIKE wildcards (% and _) and the escape character itself so user
-  // input is matched literally instead of acting as a pattern.
   return input.replace(/[\\%_]/g, (match) => `\\${match}`);
 }
 
 function likeCondition(column, value) {
-  // ILIKE, not LIKE: Postgres LIKE is case-sensitive whereas the SQLite dialect
-  // this replaced was not, so a lowercased query would silently stop matching
-  // stored names. `escape '\'` stays valid and keeps wildcards in user input
-  // literal.
   const pattern = `%${escapeLike(value)}%`;
   return sql`${column} ilike ${pattern} escape '\\'`;
 }
@@ -277,7 +266,6 @@ export async function searchUsers({ query, page, limit, accountType }) {
     .leftJoin(profiles, eq(profiles.userId, users.id))
     .where(where);
 
-  // Batch-load skills for the page of results; one query instead of N.
   const userIds = rows.map((row) => row.id);
   const skillsByUser = new Map();
 

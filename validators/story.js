@@ -2,8 +2,6 @@ import { z } from "zod";
 
 export const createStorySchema = z
   .object({
-    // trim() first so a whitespace-only value collapses to "" and trips min(1),
-    // matching the convention used by the message and comment schemas.
     image: z.string().trim().min(1, "Story image is required").max(5_000_000),
   })
   .strict();

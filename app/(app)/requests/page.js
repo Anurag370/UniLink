@@ -69,7 +69,6 @@ export default function RequestsPage() {
         body: { action: "accept" },
       });
     } catch {
-      // Ignore; reload below keeps the UI in sync.
     }
 
     loadRequests();
@@ -82,7 +81,6 @@ export default function RequestsPage() {
         body: { action: "reject" },
       });
     } catch {
-      // Ignore; reload below keeps the UI in sync.
     }
 
     loadRequests();

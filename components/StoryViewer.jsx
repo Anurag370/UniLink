@@ -19,8 +19,6 @@ function timeAgo(timestamp) {
   return `${Math.floor(seconds / 86400)}d`;
 }
 
-// Full-screen story viewer: one story at a time, auto-advances, and closes on
-// Escape. Keyboard and swipe-free navigation keep it usable on desktop.
 export default function StoryViewer({ stories, startIndex = 0, onClose }) {
   const [index, setIndex] = useState(() =>
     Math.max(0, Math.min(startIndex, stories.length - 1))
@@ -34,7 +32,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
 
   const story = stories[index];
 
-  // Auto-advance; the last story closes the viewer instead of looping.
   useEffect(() => {
     const delay =
       index >= stories.length - 1 ? AUTO_ADVANCE_MS * 2 : AUTO_ADVANCE_MS;
@@ -50,7 +47,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
     return () => clearTimeout(timer);
   }, [index, stories.length]);
 
-  // Escape closes, arrow keys move between stories.
   useEffect(() => {
     const onKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -88,7 +84,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
         className="relative w-full max-w-[400px]"
         onClick={(event) => event.stopPropagation()}
       >
-        {/* PROGRESS */}
 
         <div className="flex gap-1">
           {stories.map((item, i) => (
@@ -101,7 +96,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
           ))}
         </div>
 
-        {/* HEADER */}
 
         <div className="mt-3 flex items-center gap-3">
           <img
@@ -130,7 +124,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
           </button>
         </div>
 
-        {/* IMAGE */}
 
         <div className="relative mt-3 overflow-hidden rounded-xl bg-slate-900">
           <img
@@ -139,7 +132,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
             className="max-h-[65vh] w-full object-contain"
           />
 
-          {/* PREVIOUS */}
 
           {index > 0 && (
             <button
@@ -152,7 +144,6 @@ export default function StoryViewer({ stories, startIndex = 0, onClose }) {
             </button>
           )}
 
-          {/* NEXT */}
 
           {index < stories.length - 1 && (
             <button

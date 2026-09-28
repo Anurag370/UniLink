@@ -39,9 +39,6 @@ export default function SearchPage() {
     setShowLoginPrompt,
   ] = useState(false);
 
-  /*
-   * Map an API user row to the account shape used below.
-   */
   const toAccount = (apiUser) => {
     const profile = apiUser.profile ?? {};
 
@@ -63,9 +60,6 @@ export default function SearchPage() {
     };
   };
 
-  /*
-   * Load accounts and opportunities
-   */
   useEffect(() => {
     let cancelled = false;
 
@@ -101,9 +95,6 @@ export default function SearchPage() {
     };
   }, []);
 
-  /*
-   * Refresh connection statuses
-   */
   const loadConnectionStatuses = async () => {
     try {
       const [accepted, incoming, outgoing] =
@@ -154,9 +145,6 @@ export default function SearchPage() {
     })();
   }, [user, accounts]);
 
-  /*
-   * Keep connection status synchronized on focus
-   */
   useEffect(() => {
     if (!user) {
       return;
@@ -179,17 +167,11 @@ export default function SearchPage() {
     };
   }, [user, accounts]);
 
-  /*
-   * Search query
-   */
   const query =
     searchQuery
       .trim()
       .toLowerCase();
 
-  /*
-   * Remove currently logged-in user
-   */
   const otherAccounts =
     accounts.filter(
       (account) =>
@@ -197,9 +179,6 @@ export default function SearchPage() {
         String(user?.id)
     );
 
-  /*
-   * Filter people
-   */
   const filteredAccounts =
     otherAccounts.filter(
       (account) => {
@@ -230,9 +209,6 @@ export default function SearchPage() {
       }
     );
 
-  /*
-   * Filter opportunities
-   */
   const filteredOpportunities =
     opportunities.filter(
       (opportunity) => {
@@ -247,9 +223,6 @@ export default function SearchPage() {
       }
     );
 
-  /*
-   * Profile image
-   */
   const getProfileImage = (account) => {
     if (account.profilePhoto) {
       return account.profilePhoto;
@@ -271,9 +244,6 @@ export default function SearchPage() {
     }`;
   };
 
-  /*
-   * Branch
-   */
   const getBranch = (account) => {
     return (
       account.branch ||
@@ -283,9 +253,6 @@ export default function SearchPage() {
     );
   };
 
-  /*
-   * Year
-   */
   const getYear = (account) => {
     return (
       account.year ||
@@ -294,9 +261,6 @@ export default function SearchPage() {
     );
   };
 
-  /*
-   * Handle connection
-   */
   const handleConnect = async (accountId) => {
     if (
       !isLoggedIn ||
@@ -313,9 +277,6 @@ export default function SearchPage() {
       return;
     }
 
-    /*
-     * Already connected / pending
-     */
     if (
       (connectionStatuses[accountId] || "none") !==
       "none"
@@ -323,9 +284,6 @@ export default function SearchPage() {
       return;
     }
 
-    /*
-     * Send request
-     */
     try {
       const result = await request("/api/connections", {
         method: "POST",
@@ -348,9 +306,6 @@ export default function SearchPage() {
   return (
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
 
-      {/* =====================================================
-          DESKTOP / MOBILE SEARCH HEADER
-          ===================================================== */}
 
       <header
         className="
@@ -413,9 +368,6 @@ export default function SearchPage() {
         </div>
       </header>
 
-      {/* =====================================================
-          MAIN CONTENT
-          ===================================================== */}
 
       <main
         className="
@@ -439,9 +391,6 @@ export default function SearchPage() {
           "
         >
 
-          {/* =================================================
-              TABS
-              ================================================= */}
 
           <div
             className="
@@ -456,7 +405,6 @@ export default function SearchPage() {
             "
           >
 
-            {/* PEOPLE TAB */}
 
             <button
               type="button"
@@ -490,7 +438,6 @@ export default function SearchPage() {
               </span>
             </button>
 
-            {/* OPPORTUNITIES TAB */}
 
             <button
               type="button"
@@ -530,9 +477,6 @@ export default function SearchPage() {
             </button>
           </div>
 
-          {/* =================================================
-              PEOPLE
-              ================================================= */}
 
           {activeTab === "people" && (
             <section className="mt-5 space-y-3">
@@ -594,7 +538,6 @@ export default function SearchPage() {
                           "
                         >
 
-                          {/* PROFILE */}
 
                           <button
                             type="button"
@@ -689,7 +632,6 @@ export default function SearchPage() {
                             </div>
                           </button>
 
-                          {/* CONNECTION BUTTON */}
 
                           <button
                             type="button"
@@ -739,9 +681,6 @@ export default function SearchPage() {
             </section>
           )}
 
-          {/* =================================================
-              OPPORTUNITIES
-              ================================================= */}
 
           {activeTab ===
             "opportunities" && (
@@ -802,7 +741,6 @@ export default function SearchPage() {
                       "
                     >
 
-                      {/* OPPORTUNITY IMAGE */}
 
                       {opportunity.banner ? (
                         <img
@@ -838,7 +776,6 @@ export default function SearchPage() {
                         </div>
                       )}
 
-                      {/* OPPORTUNITY CONTENT */}
 
                       <div className="p-4">
 
@@ -948,15 +885,9 @@ export default function SearchPage() {
         </div>
       </main>
 
-      {/* =====================================================
-          BOTTOM NAV
-          ===================================================== */}
 
       <BottomNav />
 
-      {/* =====================================================
-          LOGIN PROMPT
-          ===================================================== */}
 
       <LoginPrompt
         isOpen={showLoginPrompt}

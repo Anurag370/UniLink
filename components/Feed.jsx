@@ -96,7 +96,6 @@ export default function Feed() {
     };
   }, [isLoggedIn]);
 
-  // Suggested connections: people the user is not already linked with.
   useEffect(() => {
     if (!isLoggedIn) return;
 
@@ -145,7 +144,6 @@ export default function Feed() {
     };
   }, [isLoggedIn, user?.id]);
 
-  // Upcoming opportunities for the right rail.
   useEffect(() => {
     let cancelled = false;
 
@@ -253,12 +251,10 @@ export default function Feed() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* DESKTOP SIDEBAR */}
 
       <Sidebar />
 
       <div className="lg:ml-[240px]">
-        {/* TOP NAVBAR */}
 
         <header className="sticky top-0 z-40 flex h-[60px] items-center border-b border-slate-200 bg-white/95 backdrop-blur-md">
           <div className="mx-auto flex w-full max-w-3xl items-center justify-end px-4 sm:px-6 lg:px-8">
@@ -273,10 +269,8 @@ export default function Feed() {
           </div>
         </header>
 
-        {/* MAIN CONTENT */}
 
         <main className="mx-auto w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
-          {/* SEARCH */}
 
           <div className="relative">
             <Search
@@ -294,14 +288,11 @@ export default function Feed() {
           </div>
 
           <div className="mt-5 xl:grid xl:grid-cols-[minmax(0,1fr)_300px] xl:items-start xl:gap-6">
-            {/* LEFT COLUMN */}
 
             <div>
-              {/* STORIES */}
 
               <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4">
                 <div className="flex gap-5 overflow-x-auto pb-1 scrollbar-hide">
-                  {/* YOUR STORY */}
 
                   <button
                     type="button"
@@ -325,7 +316,6 @@ export default function Feed() {
                     </span>
                   </button>
 
-                  {/* STORIES */}
 
                   {stories.map((story, index) => (
                     <button
@@ -355,13 +345,11 @@ export default function Feed() {
                 </div>
               </section>
 
-              {/* FEED */}
 
               <section className="mt-5 space-y-5">
                 {posts.length > 0 ? (
                   posts.map((post) => <PostCard key={post.id} post={post} />)
                 ) : (
-                  /* EMPTY FEED */
 
                   <div className="rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center">
                     <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-indigo-50 text-indigo-500">
@@ -389,10 +377,8 @@ export default function Feed() {
               </section>
             </div>
 
-            {/* RIGHT SIDEBAR */}
 
             <aside className="hidden space-y-4 xl:block">
-              {/* SUGGESTED CONNECTIONS */}
 
               {suggestions.length > 0 && (
                 <section className="rounded-2xl border border-slate-200 bg-white p-4">
@@ -453,7 +439,6 @@ export default function Feed() {
                 </section>
               )}
 
-              {/* UPCOMING OPPORTUNITIES */}
 
               {upcoming.length > 0 && (
                 <section className="rounded-2xl border border-slate-200 bg-white p-4">
@@ -512,7 +497,6 @@ export default function Feed() {
                 </section>
               )}
 
-              {/* QUICK LINKS */}
 
               <section className="rounded-2xl border border-slate-200 bg-white p-4">
                 <h2 className="text-sm font-semibold text-slate-900">
@@ -557,18 +541,15 @@ export default function Feed() {
         </main>
       </div>
 
-      {/* MOBILE NAVIGATION */}
 
       <BottomNav />
 
-      {/* LOGIN PROMPT */}
 
       <LoginPrompt
         isOpen={showLoginPrompt}
         onClose={() => setShowLoginPrompt(false)}
       />
 
-      {/* STORY VIEWER */}
 
       {storyIndex !== null && stories.length > 0 && (
         <StoryViewer

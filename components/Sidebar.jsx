@@ -68,7 +68,6 @@ export default function Sidebar() {
         lg:flex
       "
     >
-      {/* LOGO */}
 
       <button
         type="button"
@@ -84,7 +83,6 @@ export default function Sidebar() {
         </span>
       </button>
 
-      {/* NAVIGATION */}
 
       <nav className="mt-9 flex-1 overflow-y-auto px-4 pb-4">
         {NAV_ITEMS.map((item) => {
@@ -120,7 +118,6 @@ export default function Sidebar() {
           );
         })}
 
-        {/* CREATE */}
 
         <button
           type="button"
@@ -147,7 +144,6 @@ export default function Sidebar() {
         </button>
       </nav>
 
-      {/* USER */}
 
       <div className="border-t border-slate-200 px-4 py-4">
         <div className="flex items-center gap-3">

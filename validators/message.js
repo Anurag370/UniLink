@@ -7,9 +7,6 @@ export const sendMessageSchema = z
   })
   .strict();
 
-// The route segment is [userId], so the params object is keyed by userId.
-// Reusing idParamsSchema here validated a non-existent `id` and rejected every
-// request with "expected number, received NaN".
 export const messageParamsSchema = z.object({
   userId: z.coerce.number().int().positive(),
 });

@@ -68,9 +68,6 @@ export default function Register() {
     try {
       await register(newUser);
 
-      // Read at submit time, not on mount: the query cannot change while the
-      // form is on screen, and it keeps ?next= out of React state entirely.
-      // Resolves to "/" when absent, and rejects off-site values.
       router.push(readNextParam());
     } catch {
       setRegistrationError(
@@ -148,7 +145,6 @@ export default function Register() {
           className="auth-form"
           onSubmit={handleRegister}
         >
-          {/* PROFILE PICTURE */}
 
           <div className="mb-5 flex items-center gap-4">
             <div className="relative shrink-0">

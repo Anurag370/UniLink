@@ -95,7 +95,6 @@ async function waitForServer(baseUrl, child) {
         return;
       }
     } catch {
-      // Not ready yet (connection refused or still compiling).
     }
     await sleep(400);
   }
@@ -107,22 +106,15 @@ function killTree(pid) {
     try {
       spawnSync("taskkill", ["/pid", String(pid), "/T", "/F"], { stdio: "ignore" });
     } catch {
-      // Ignore; process may already be gone.
     }
   } else {
     try {
       process.kill(pid, "SIGTERM");
     } catch {
-      // Ignore.
     }
   }
 }
 
-// Deletes everything the run created, using the query builder rather than raw
-// SQL. The previous version hand-built `?` placeholder lists and reused one
-// list across two statements, which Postgres cannot express without manual
-// renumbering. Cascades are declared in the schema but the ordering is made
-// explicit here so the intent survives a future schema change.
 async function cleanup({ url, runId }) {
   const pool = new Pool({ connectionString: url, max: 1 });
   const db = drizzle(pool, { schema });
@@ -190,9 +182,6 @@ async function cleanup({ url, runId }) {
       await db.delete(schema.userSkills).where(inArray(schema.userSkills.userId, ids));
     }
 
-    // The skills table is global, so only the ones this run created are removed.
-    // The skills -> user_skills cascade removes their links, and any skill a
-    // test user borrowed from the wider catalogue is deliberately left intact.
     await db.delete(schema.skills).where(like(schema.skills.name, `TA-${runId}-%`));
     await db.delete(schema.users).where(like(schema.users.email, emailPattern));
 
@@ -231,8 +220,6 @@ export default async function setup() {
     throw new Error("JWT_SECRET must be present in .env.");
   }
 
-  // A localhost database is a deliberate throwaway sandbox, so it is allowed
-  // without the loud banner. Anything remote gets the full warning.
   const isLocal = LOCAL_HOSTS.includes(new URL(url).hostname);
   if (!isLocal || process.env.API_TEST_ALLOW_LOCAL !== "1") {
     console.error(
@@ -286,8 +273,6 @@ export default async function setup() {
 
   await waitForServer(baseUrl, child);
 
-  // No credentials are written to disk: the spawned server inherits the
-  // environment, and the test client is given the JWT from the login response.
   const meta = { baseUrl, runId, port, url };
   writeFileSync(metaFile, JSON.stringify(meta));
 
@@ -298,7 +283,6 @@ export default async function setup() {
           try {
             killTree(child.pid);
           } catch {
-            // already gone
           }
           resolve();
         }, 6000);

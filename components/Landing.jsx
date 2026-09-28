@@ -1,12 +1,5 @@
 import Link from "next/link";
 
-// Public entry point, rendered only for signed-out visitors on "/". Holds no
-// state, so it works as either a client or server component -- deliberately no
-// "use client".
-//
-// It is the one place the app brands itself: the navbar wordmark was removed so
-// the wordmark appears exactly once, at the front door. Authenticated chrome
-// stays unbranded.
 export default function Landing() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-slate-50 px-6 py-16 text-center">

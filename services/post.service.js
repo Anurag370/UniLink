@@ -145,10 +145,6 @@ export async function togglePostLike(postId, userId) {
       await tx
         .delete(postLikes)
         .where(and(eq(postLikes.postId, postId), eq(postLikes.userId, userId)))
-      // The counter is incremented in SQL rather than from a value read before
-      // the transaction. Postgres runs concurrent statements against the same
-      // row, so writing `post.likes - 1` from a stale read loses updates and
-      // permanently skews the total.
       await tx
         .update(posts)
         .set({
