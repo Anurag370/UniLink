@@ -59,10 +59,10 @@ export default function AddProject() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-16">
+    <div className="min-h-screen bg-slate-50">
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex h-[64px] w-full max-w-[1000px] items-center justify-between px-5 lg:px-8">
+        <div className="mx-auto flex h-[64px] w-full max-w-[1000px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -97,13 +97,13 @@ export default function AddProject() {
       </header>
 
       {saveError && (
-        <p className="mx-auto mt-3 max-w-[1000px] px-5 text-center text-sm text-red-500">
+        <p className="mx-auto mt-3 max-w-[1000px] px-4 text-center text-sm text-red-500 sm:px-6 lg:px-8">
           {saveError}
         </p>
       )}
 
       {/* PAGE */}
-      <main className="mx-auto w-full max-w-[1000px] px-5 py-8 lg:px-8 lg:py-10">
+      <main className="mx-auto w-full max-w-[1000px] px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
         {/* PAGE INTRO */}
         <div className="mb-8">
           <div className="flex items-center gap-3">

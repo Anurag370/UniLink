@@ -128,8 +128,8 @@ export default function RequestsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <main className="mx-auto w-full max-w-3xl px-4 pb-32 pt-5 sm:px-6 sm:pt-8">
+    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
+      <main className="mx-auto w-full max-w-3xl px-4 pb-20 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
 
         <button
           onClick={() => router.back()}

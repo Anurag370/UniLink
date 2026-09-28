@@ -281,37 +281,43 @@ export default function OtherProfilePage() {
     <div className="min-h-screen bg-slate-50 pb-24 lg:pb-10">
 
       {/* Header */}
-      <header className="sticky top-0 z-40 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">
+      <header className="sticky top-0 z-40 flex h-[60px] items-center border-b border-slate-200 bg-white/95 backdrop-blur-md">
 
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="flex h-9 w-9 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100"
-        >
-          <ArrowLeft size={20} />
-        </button>
+        <div className="mx-auto flex w-full max-w-3xl items-center px-4 sm:px-6 lg:px-8">
 
-        <h1 className="text-base font-semibold text-slate-900">
-          Profile
-        </h1>
+          <div className="flex flex-1 items-center">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100"
+            >
+              <ArrowLeft size={20} />
+            </button>
+          </div>
 
-        {isOwnProfile ? (
-          <button
-            type="button"
-            onClick={() =>
-              router.push("/profile/edit")
-            }
-            className="text-sm font-semibold text-indigo-500"
-          >
-            Edit
-          </button>
-        ) : (
-          <div className="w-9" />
-        )}
+          <h1 className="shrink-0 text-base font-semibold text-slate-900">
+            Profile
+          </h1>
+
+          <div className="flex flex-1 items-center justify-end">
+            {isOwnProfile && (
+              <button
+                type="button"
+                onClick={() =>
+                  router.push("/profile/edit")
+                }
+                className="text-sm font-semibold text-indigo-500"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+
+        </div>
       </header>
 
       {/* Main */}
-      <main className="mx-auto w-full max-w-[820px] px-4 py-6 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-3xl px-4 pt-6 pb-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
 
         {/* Profile */}
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

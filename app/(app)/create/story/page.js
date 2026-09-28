@@ -51,8 +51,9 @@ export default function CreateStory() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 md:mx-auto md:max-w-[760px] lg:max-w-[800px]">
-      <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/96 px-[14px] backdrop-blur-md">
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto w-full max-w-3xl">
+      <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/96 px-4 backdrop-blur-md sm:px-6 lg:px-8">
         <button
           className="flex items-center justify-center"
           onClick={() => router.back()}
@@ -116,10 +117,11 @@ export default function CreateStory() {
               onClick={() => setImage(null)}
             >
               <X size={20} />
-            </button>
-          </div>
-        )}
+        </button>
+      </div>
+      )}
       </main>
+      </div>
     </div>
   );
 }

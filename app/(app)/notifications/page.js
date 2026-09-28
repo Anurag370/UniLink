@@ -281,10 +281,10 @@ export default function NotificationsPage() {
         {/* Notifications */}
         <section className="mt-6">
           {notifications.length === 0 ? (
-            <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                <Bell size={28} />
-              </div>
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+            <Bell size={25} />
+          </div>
 
               <h2 className="mt-5 text-base font-semibold text-slate-900">
                 No notifications

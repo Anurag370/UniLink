@@ -357,25 +357,26 @@ export default function SearchPage() {
           sticky
           top-0
           z-40
+          flex
+          h-[60px]
+          items-center
           border-b
           border-slate-200
           bg-white/95
-          px-4
-          py-4
           backdrop-blur-md
-
-          
-          
-
-          
-          
         "
       >
         <div
           className="
             mx-auto
+            flex
             w-full
-            max-w-4xl
+            max-w-3xl
+            items-center
+            gap-3
+            px-4
+            sm:px-6
+            lg:px-8
           "
         >
           <div
@@ -418,25 +419,23 @@ export default function SearchPage() {
 
       <main
         className="
+          mx-auto
           w-full
+          max-w-3xl
           px-4
-          py-6
+          pt-6
+          pb-6
 
           sm:px-6
+          sm:pt-8
 
-          
-          
           lg:px-8
-
-          
-          
+          lg:pt-10
         "
       >
         <div
           className="
-            mx-auto
             w-full
-            max-w-4xl
           "
         >
 
@@ -541,22 +540,21 @@ export default function SearchPage() {
               {filteredAccounts.length === 0 ? (
                 <div
                   className="
+                    flex min-h-[320px] flex-col items-center justify-center
                     rounded-2xl
                     border
                     border-slate-200
                     bg-white
-                    px-5
-                    py-12
+                    px-6
                     text-center
                     shadow-sm
                   "
                 >
-                  <Users
-                    size={30}
-                    className="mx-auto text-slate-300"
-                  />
+                  <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+                    <Users size={25} />
+                  </div>
 
-                  <h3 className="mt-3 text-sm font-semibold text-slate-800">
+                  <h3 className="mt-4 text-base font-semibold text-slate-800">
                     No people found
                   </h3>
 
@@ -753,22 +751,21 @@ export default function SearchPage() {
               0 ? (
                 <div
                   className="
+                    flex min-h-[320px] flex-col items-center justify-center
                     rounded-2xl
                     border
                     border-slate-200
                     bg-white
-                    px-5
-                    py-12
+                    px-6
                     text-center
                     shadow-sm
                   "
                 >
-                  <CalendarDays
-                    size={30}
-                    className="mx-auto text-slate-300"
-                  />
+                  <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+                    <CalendarDays size={25} />
+                  </div>
 
-                  <h3 className="mt-3 text-sm font-semibold text-slate-800">
+                  <h3 className="mt-4 text-base font-semibold text-slate-800">
                     No opportunities found
                   </h3>
 

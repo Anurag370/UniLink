@@ -291,10 +291,10 @@ export default function ConnectionsPage() {
         {/* Requests */}
         <section className="mt-5">
           {requests.length === 0 ? (
-            <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                <Users size={25} />
-              </div>
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+            <Users size={25} />
+          </div>
 
               <h2 className="mt-4 text-base font-semibold text-slate-900">
                 No connection requests

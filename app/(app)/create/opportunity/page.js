@@ -162,9 +162,10 @@ export default function CreateOpportunity() {
     (type !== "Other" || customType.trim());
 
   return (
-    <div className="min-h-screen bg-slate-50 md:mx-auto md:max-w-[760px] lg:max-w-[800px]">
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto w-full max-w-3xl">
       {/* HEADER */}
-      <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/96 px-[14px] backdrop-blur-md">
+      <header className="sticky top-0 z-50 flex h-[60px] items-center justify-between border-b border-slate-200 bg-white/96 px-4 backdrop-blur-md sm:px-6 lg:px-8">
         <button
           type="button"
           className="flex items-center justify-center"
@@ -193,7 +194,7 @@ export default function CreateOpportunity() {
         </p>
       )}
 
-      <main className="px-4 pt-5 pb-[100px]">
+      <main className="px-4 pt-6 pb-6 sm:px-6 lg:px-8">
         {/* INTRO CARD */}
         <div className="mb-6 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-[15px]">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-500">
@@ -387,9 +388,10 @@ export default function CreateOpportunity() {
             onChange={(event) =>
               setLink(event.target.value)
             }
-          />
-        </div>
+        />
+      </div>
       </main>
+      </div>
     </div>
   );
 }

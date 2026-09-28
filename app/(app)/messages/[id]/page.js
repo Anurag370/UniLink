@@ -280,10 +280,11 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-24 lg:pb-0">
+    <div className="flex min-h-screen flex-col bg-slate-50 pb-24 lg:pb-0">
 
       {/* Header */}
-      <header className="sticky top-0 z-40 flex h-[64px] items-center gap-3 border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md">
+      <header className="sticky top-0 z-40 flex h-[60px] items-center border-b border-slate-200 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 sm:px-6 lg:px-8">
 
         <button
           type="button"
@@ -357,10 +358,11 @@ export default function ChatPage() {
         >
           <MoreVertical size={19} />
         </button>
+        </div>
       </header>
 
       {/* Chat */}
-      <main className="mx-auto flex w-full max-w-3xl flex-col px-4">
+      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 sm:px-6 lg:px-8">
 
         {connectionStatus !== "accepted" ? (
           <div className="flex min-h-[70vh] flex-col items-center justify-center text-center">
@@ -392,7 +394,7 @@ export default function ChatPage() {
         ) : (
           <>
             {/* Messages */}
-            <div className="min-h-[calc(100vh-145px)] space-y-3 overflow-y-auto py-6">
+            <div className="min-h-0 flex-1 space-y-3 overflow-y-auto py-6">
 
               {messages.length === 0 ? (
                 <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">

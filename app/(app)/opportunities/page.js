@@ -83,7 +83,7 @@ export default function Opportunities() {
   return (
     <div className="min-h-screen bg-slate-50 pb-10">
       {/* HEADER */}
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 px-6 py-4 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 px-4 py-4 backdrop-blur-md sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-slate-900">
@@ -111,9 +111,9 @@ export default function Opportunities() {
       </header>
 
       {/* CONTENT */}
-      <main className="mx-auto max-w-[1100px] px-6 pt-6">
+      <main className="mx-auto max-w-[1100px] px-4 pt-6 sm:px-6 lg:px-8">
         {/* SEARCH */}
-        <div className="mb-6 flex h-11 max-w-[600px] items-center gap-3 rounded-xl border border-slate-200 bg-white px-4">
+        <div className="mb-6 flex h-11 w-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-4">
           <Search
             size={18}
             className="text-slate-400"

@@ -179,7 +179,7 @@ function PostCard({ post }) {
   return (
     <>
       {/* POST */}
-      <article className="w-full overflow-hidden rounded-[14px] border border-slate-200 bg-white p-[14px] shadow-[0_2px_8px_rgba(15,23,42,0.04)] mt-[10px] mb-[18px] mx-3 md:ml-0 md:mr-0 max-md:ml-2 max-md:mr-2 max-md:rounded-[15px] max-[380px]:mx-2 max-[380px]:p-3 lg:my-[14px] lg:rounded-2xl lg:p-4">
+      <article className="w-full overflow-hidden rounded-[14px] border border-slate-200 bg-white p-[14px] shadow-[0_2px_8px_rgba(15,23,42,0.04)] mt-3 mb-3 max-md:rounded-[15px] max-[380px]:p-3 lg:rounded-2xl lg:p-4">
 
         {/* POST HEADER */}
         <div className="flex items-center justify-between">

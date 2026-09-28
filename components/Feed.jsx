@@ -260,8 +260,8 @@ export default function Feed() {
       <div className="lg:ml-[240px]">
         {/* TOP NAVBAR */}
 
-        <header className="sticky top-0 z-40 h-[64px] border-b border-slate-200 bg-white/95 backdrop-blur-md">
-          <div className="mx-auto flex h-full w-full max-w-[1000px] items-center justify-end px-5 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-40 flex h-[60px] items-center border-b border-slate-200 bg-white/95 backdrop-blur-md">
+          <div className="mx-auto flex w-full max-w-3xl items-center justify-end px-4 sm:px-6 lg:px-8">
             <button
               type="button"
               onClick={() => router.push("/notifications")}
@@ -275,7 +275,7 @@ export default function Feed() {
 
         {/* MAIN CONTENT */}
 
-        <main className="mx-auto w-full max-w-[1000px] px-4 pb-24 pt-5 sm:px-6 lg:px-8">
+        <main className="mx-auto w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
           {/* SEARCH */}
 
           <div className="relative">

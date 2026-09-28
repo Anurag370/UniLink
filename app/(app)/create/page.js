@@ -7,7 +7,8 @@ export default function Create() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-slate-50 p-[24px_16px_100px] md:mx-auto md:max-w-[760px] lg:max-w-[800px]">
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto w-full max-w-3xl px-4 pb-6 pt-6 sm:px-6 lg:px-8">
       <div className="mb-6">
         <h1 className="text-2xl">Create</h1>
         <p className="mt-[5px] text-slate-500 text-[12px]">What do you want to share?</p>
@@ -55,6 +56,7 @@ export default function Create() {
             <p className="mt-1 text-slate-500 text-[10px] leading-[1.4]">Add a hackathon, event or opportunity</p>
           </div>
         </button>
+      </div>
       </div>
     </div>
   );

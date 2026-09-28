@@ -260,10 +260,10 @@ export default function AlumniPage() {
         {/* Alumni */}
         <section className="mt-4">
           {filteredAlumni.length === 0 ? (
-            <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-violet-50 text-violet-500">
-                <GraduationCap size={26} />
-              </div>
+        <div className="flex min-h-[320px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400">
+            <GraduationCap size={25} />
+          </div>
 
               <h2 className="mt-4 text-base font-semibold text-slate-900">
                 No alumni found

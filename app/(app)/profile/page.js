@@ -396,63 +396,62 @@ function ProfileContent() {
 
       <header
         className="
-          sticky top-0 z-50
+          sticky top-0 z-40
           flex h-[60px]
-          items-center justify-between
+          items-center
           border-b border-slate-200
           bg-white/95
-          px-4
           backdrop-blur-md
-
-          
-          
         "
       >
-        <button
-          type="button"
-          aria-label="Go back"
-          onClick={() => router.back()}
-          className="flex size-9 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100"
+        <div
+          className="
+            mx-auto flex w-full max-w-3xl items-center justify-between
+            px-4 sm:px-6 lg:px-8
+          "
         >
-          <ArrowLeft size={21} />
-        </button>
-
-        <h1 className="text-base font-semibold text-slate-900">
-          Profile
-        </h1>
-
-        {isOwnProfile ? (
           <button
             type="button"
-            aria-label="Edit profile"
-            onClick={() =>
-              router.push("/profile/edit")
-            }
+            aria-label="Go back"
+            onClick={() => router.back()}
             className="flex size-9 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100"
           >
-            <Edit3 size={19} />
+            <ArrowLeft size={21} />
           </button>
-        ) : (
-          <div className="size-9" />
-        )}
+
+          <h1 className="text-base font-semibold text-slate-900">
+            Profile
+          </h1>
+
+          {isOwnProfile ? (
+            <button
+              type="button"
+              aria-label="Edit profile"
+              onClick={() =>
+                router.push("/profile/edit")
+              }
+              className="flex size-9 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100"
+            >
+              <Edit3 size={19} />
+            </button>
+          ) : (
+            <div className="size-9" />
+          )}
+        </div>
       </header>
 
       {/* MAIN */}
 
       <main
         className="
-          w-full
+          mx-auto w-full max-w-3xl
           px-4
-          py-6
-          sm:px-6
-          
-          
-          lg:px-8
-          
-          
+          pt-6 pb-6
+          sm:px-6 sm:pt-8
+          lg:px-8 lg:pt-10
         "
       >
-        <div className="mx-auto w-full max-w-[900px]">
+        <div className="w-full">
 
           {/* PROFILE CARD */}
 
@@ -611,7 +610,7 @@ function ProfileContent() {
 
           {/* ABOUT */}
 
-          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
             <div className="flex items-center gap-3">
 
@@ -682,7 +681,7 @@ function ProfileContent() {
 
           {/* SKILLS */}
 
-          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
             <div className="flex items-center gap-3">
 
@@ -725,7 +724,7 @@ function ProfileContent() {
 
           {/* PROJECTS */}
 
-          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
             <div className="flex items-center justify-between gap-3">
 
@@ -921,7 +920,7 @@ function ProfileContent() {
           {/* ALUMNI EXPERIENCE */}
 
           {isAlumni && (
-            <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mt-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
 
               <div className="flex items-center gap-3">
 
